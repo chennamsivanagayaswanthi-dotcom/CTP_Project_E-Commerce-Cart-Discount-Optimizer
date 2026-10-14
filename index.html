@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        ShopSmart | Discount Optimizer
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+<!-- =====================================================
+     BACKGROUND DECORATIONS
+====================================================== -->
+
+<div class="floating-item floating-one">
+    🛍️
+</div>
+
+<div class="floating-item floating-two">
+    💻
+</div>
+
+<div class="floating-item floating-three">
+    🎧
+</div>
+
+<div class="floating-item floating-four">
+    ✨
+</div>
+
+
+<!-- =====================================================
+     NAVIGATION
+====================================================== -->
+
+<nav class="navbar">
+
+    <div class="brand">
+
+        <div class="brand-icon">
+            🛍️
+        </div>
+
+        <div>
+
+            <h1>
+                ShopSmart
+            </h1>
+
+            <span>
+                Smart Shopping • Smart Savings
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <button
+        class="cart-button"
+        onclick="scrollToCart()"
+    >
+
+        🛒
+
+        <span>
+            Cart
+        </span>
+
+        <b id="cartCount">
+            0
+        </b>
+
+    </button>
+
+</nav>
+
+
+<!-- =====================================================
+     MAIN CONTENT
+====================================================== -->
+
+<main class="main-container">
+
+
+    <!-- =================================================
+         HERO
+    ================================================== -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <span class="hero-label">
+                ✨ SMART DISCOUNT SHOPPING
+            </span>
+
+            <h2>
+                Shop what you love.
+                <br>
+
+                <span>
+                    Pay what you should.
+                </span>
+            </h2>
+
+            <p>
+                Add your favorite products to the cart
+                and let our Dynamic Programming engine
+                find the best valid discount combination.
+            </p>
+
+            <button
+                class="hero-button"
+                onclick="scrollToProducts()"
+            >
+
+                Start Shopping
+
+                <span>
+                    →
+                </span>
+
+            </button>
+
+        </div>
+
+
+        <div class="hero-visual">
+
+            <div class="hero-circle">
+
+                <div class="hero-product">
+                    💻
+                </div>
+
+                <div class="mini-product mini-one">
+                    🎧
+                </div>
+
+                <div class="mini-product mini-two">
+                    📱
+                </div>
+
+                <div class="mini-product mini-three">
+                    ⌚
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         PRODUCTS
+    ================================================== -->
+
+    <section
+        class="section"
+        id="productsSection"
+    >
+
+        <div class="section-heading">
+
+            <div>
+
+                <span class="step-label">
+                    STEP 1
+                </span>
+
+                <h2>
+                    Choose Your Products
+                </h2>
+
+                <p>
+                    Pick the products you want to purchase.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="shopping-tools">
+
+            <div class="search-box">
+
+                <span>
+                    🔍
+                </span>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search products..."
+                    oninput="filterProducts()"
+                >
+
+            </div>
+
+
+            <select
+                id="categoryFilter"
+                onchange="filterProducts()"
+            >
+
+                <option value="All">
+                    All Categories
+                </option>
+
+                <option value="Electronics">
+                    Electronics
+                </option>
+
+                <option value="Fashion">
+                    Fashion
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div
+            class="product-grid"
+            id="productGrid"
+        >
+
+            <!-- Products inserted by JavaScript -->
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         CART
+    ================================================== -->
+
+    <section
+        class="section cart-section"
+        id="cartSection"
+    >
+
+        <div class="section-heading">
+
+            <div>
+
+                <span class="step-label">
+                    YOUR CART
+                </span>
+
+                <h2>
+                    Shopping Cart 🛒
+                </h2>
+
+                <p>
+                    Review your selected products.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="cartContainer"
+            class="cart-container"
+        >
+
+            <!-- Cart inserted by JavaScript -->
+
+        </div>
+
+
+        <div class="cart-summary">
+
+            <div>
+
+                <span>
+                    Subtotal
+                </span>
+
+                <strong id="cartTotal">
+                    ₹0
+                </strong>
+
+            </div>
+
+
+            <button
+                class="primary-button"
+                onclick="goToCoupons()"
+            >
+
+                Continue to Offers
+
+                <span>
+                    →
+                </span>
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         COUPONS
+    ================================================== -->
+
+    <section
+        class="section coupons-section"
+        id="couponSection"
+    >
+
+        <div class="section-heading">
+
+            <div>
+
+                <span class="step-label">
+                    STEP 2
+                </span>
+
+                <h2>
+                    Available Offers 🏷️
+                </h2>
+
+                <p>
+                    Select the coupons you want the
+                    optimizer to consider.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="coupon-grid"
+            id="couponGrid"
+        >
+
+            <!-- Coupons inserted by JavaScript -->
+
+        </div>
+
+
+        <div class="optimization-area">
+
+            <div class="optimization-info">
+
+                <span>
+                    🧠
+                </span>
+
+                <div>
+
+                    <strong>
+                        Let the optimizer decide
+                    </strong>
+
+                    <p>
+                        Our Dynamic Programming algorithm
+                        checks valid combinations and finds
+                        the lowest payable amount.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="optimize-button"
+                onclick="optimizeCart()"
+            >
+
+                ✨ Find Best Discount
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         RESULT
+    ================================================== -->
+
+    <section
+        class="result-section"
+        id="resultSection"
+    >
+
+        <div class="result-header">
+
+            <span>
+                🎉
+            </span>
+
+            <div>
+
+                <span class="step-label">
+                    STEP 3
+                </span>
+
+                <h2>
+                    Your Best Deal
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="resultContent"
+            class="result-content"
+        >
+
+            <div class="result-placeholder">
+
+                <div>
+                    ✨
+                </div>
+
+                <h3>
+                    Your optimized price will appear here
+                </h3>
+
+                <p>
+                    Add products and select available
+                    offers to calculate your best deal.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- =====================================================
+     FOOTER
+====================================================== -->
+
+<footer>
+
+    <div>
+        🛍️
+        <strong>
+            ShopSmart
+        </strong>
+    </div>
+
+    <p>
+        E-Commerce Cart Discount Optimizer
+        • Dynamic Programming
+    </p>
+
+</footer>
+
+
+<script
+    src="{{ url_for('static', filename='script.js') }}"
+></script>
+
+</body>
+
+</html>
